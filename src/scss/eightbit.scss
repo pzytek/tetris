@@ -1,0 +1,161 @@
+$outline-width: 6px;
+$shadow-width: 4px;
+$font-8bit: "Press Start 2P", cursive;
+
+$input-container-background: #ffff;
+$sec-input-container-background: #ffff;
+$input-container-shadow-background: #ffff;
+$input-container-color: #ffff;
+
+$button-background: #ffff;
+$sec-button-background: #ece5e5;
+$button-shadow-color: #c9b9b9;
+$button-color: #000000;
+
+$first-button-background: #92cd41;
+$first-sec-button-background: #76c442;
+$first-shadow-color: #4aa52e;
+$first-button-color: #ffff;
+
+$second-button-background: #e76e55;
+$second-sec-button-background: #ce372b;
+$second-shadow-color: #8c2022;
+$second-button-color: #ffff;
+
+$third-button-background: #f7d51d;
+$third-sec-button-background: #d1aa0f;
+$third-shadow-color: #e59400;
+$third-button-color: #ffff;
+
+$fourth-button-background: #5d84d8;
+$fourth-sec-button-background: #436cc5;
+$fourth-shadow-color: #1f479e;
+$fourth-button-color: #ffff;
+
+.eightbit-input {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  font-family: $font-8bit;
+  font-size: 2rem;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    cursor: inherit;
+  }
+}
+
+@mixin eightbit-styles($background, $hover-background, $shadow, $color) {
+  background: $background;
+  display: inline-block;
+  position: relative;
+  // text-align: center;
+  font-size: 1.8rem;
+  padding: 2rem;
+  font-family: $font-8bit;
+  text-decoration: none;
+  color: $color;
+  text-transform: capitalize;
+  margin: 0.8rem;
+  width: 90%;
+  box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $shadow;
+  cursor: url(/assets/cursor-click.png), auto;
+
+  &:hover,
+  &:focus {
+    background: $hover-background;
+    box-shadow: inset (-$shadow-width * 1.5) (-$shadow-width * 1.5) 0px 0px
+      $shadow;
+  }
+
+  &:active {
+    box-shadow: inset $shadow-width $shadow-width 0px 0px $shadow;
+  }
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: content-box;
+  }
+
+  &:before {
+    top: -$outline-width;
+    left: 0;
+    border-top: $outline-width black solid;
+    border-bottom: $outline-width black solid;
+  }
+
+  &:after {
+    left: -$outline-width;
+    top: 0;
+    border-left: $outline-width black solid;
+    border-right: $outline-width black solid;
+  }
+}
+
+.eightbit-container {
+  @include eightbit-styles(
+    $input-container-background,
+    $sec-input-container-background,
+    $input-container-shadow-background,
+    $input-container-color
+  );
+}
+
+.eightbit-btn {
+  @include eightbit-styles(
+    $button-background,
+    $sec-button-background,
+    $button-shadow-color,
+    $button-color
+  );
+  &--short {
+    @extend .eightbit-btn;
+    width: 35%;
+    margin-left: 2rem;
+  }
+}
+
+.eightbit-btn--first {
+  @include eightbit-styles(
+    $first-button-background,
+    $first-sec-button-background,
+    $first-shadow-color,
+    $first-button-color
+  );
+}
+
+.eightbit-btn--second {
+  @include eightbit-styles(
+    $second-button-background,
+    $second-sec-button-background,
+    $second-shadow-color,
+    $second-button-color
+  );
+}
+
+.eightbit-btn--third {
+  @include eightbit-styles(
+    $third-button-background,
+    $third-sec-button-background,
+    $third-shadow-color,
+    $third-button-color
+  );
+}
+
+.eightbit-btn--fourth {
+  @include eightbit-styles(
+    $fourth-button-background,
+    $fourth-sec-button-background,
+    $fourth-shadow-color,
+    $fourth-button-color
+  );
+}

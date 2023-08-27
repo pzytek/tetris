@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Tetris</title>
+
+    <link rel="stylesheet" href="scss/style.scss" />
+    <link rel="icon" href="tetris.png" sizes="any" />
+    <link
+      href="https://fonts.cdnfonts.com/css/press-start-2p"
+      rel="stylesheet"
+    />
+
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="game-container">
+      <dialog open id="modal">
+        <div class="modal__nick-content">
+          <span class="modal__span paragraph">nick</span>
+          <form id="nick-form" class="modal__form">
+            <div class="eightbit-container">
+              <input
+                type="text"
+                id="nick"
+                name="nick"
+                class="eightbit-input"
+                type="text"
+                placeholder="Enter nick "
+                pattern="[^ ]{1,10}"
+                title="Username must consist of 1 to 10 characters, no spaces."
+                autocomplete="off"
+                required
+              />
+            </div>
+            <button type="submit" class="eightbit-btn--short modal__submit-btn">
+              submit
+            </button>
+          </form>
+        </div>
+        <div class="modal__controls-content">
+          <span class="modal__span paragraph">controls</span>
+          <p class="modal__p">&uarr; : turn block</p>
+          <p class="modal__p">&darr; : move down</p>
+          <p class="modal__p">&larr; : move left</p>
+          <p class="modal__p">&#8594; : move right</p>
+          <p class="modal__p">space : instant place</p>
+        </div>
+        <div class="modal__style-content">
+          <span class="modal__span paragraph">style</span>
+          <div class="space-around">
+            <button class="eightbit-btn--short">retro</button>
+            <button class="eightbit-btn--short">modern</button>
+          </div>
+        </div>
+        <button class="eightbit-btn modal__close-btn">close</button>
+      </dialog>
+      <canvas class="game-canvas"></canvas>
+    </div>
+    <div class="rest-container">
+      <div class="small-container">
+        <p class="paragraph">score</p>
+        <p class="score paragraph"></p>
+      </div>
+      <div class="small-container">
+        <p class="paragraph">next</p>
+        <canvas class="shape-canvas"></canvas>
+      </div>
+      <div class="small-container">
+        <button class="btn-start eightbit-btn--first">start</button>
+        <button class="btn-pause eightbit-btn--second">pause</button>
+        <button class="btn-reset eightbit-btn--third">reset</button>
+        <button class="btn-settings eightbit-btn--fourth">settings</button>
+      </div>
+    </div>
+  </body>
+</html>
