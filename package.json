@@ -1,7 +1,11 @@
 {
   "name": "tetris",
   "version": "1.0.0",
-  "description": "",
+  "description": "A classic Tetris game implemented in JavaScript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pzytek/tetris.git"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "parcel src/index.html",
@@ -11,7 +15,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel-bundler": "^1.12.5",
-    "sass": "^1.66.1"
+    "@parcel/transformer-sass": "^2.9.3",
+    "parcel": "^2.9.3",
+    "sass": "^1.66.1",
+    "typescript": "^5.2.2"
   }
 }

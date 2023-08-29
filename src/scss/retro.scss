@@ -1,6 +1,6 @@
 $outline-width: 6px;
 $shadow-width: 4px;
-$font-8bit: "Press Start 2P", cursive;
+$font-retro: "Press Start 2P", cursive;
 
 $input-container-background: #ffff;
 $sec-input-container-background: #ffff;
@@ -32,14 +32,13 @@ $fourth-sec-button-background: #436cc5;
 $fourth-shadow-color: #1f479e;
 $fourth-button-color: #ffff;
 
-.eightbit-input {
+.retro-input {
   margin: 0;
   padding: 0;
   display: flex;
   width: 100%;
   position: relative;
   z-index: 1;
-  font-family: $font-8bit;
   font-size: 2rem;
   border: none;
   &:focus {
@@ -50,21 +49,18 @@ $fourth-button-color: #ffff;
   }
 }
 
-@mixin eightbit-styles($background, $hover-background, $shadow, $color) {
+@mixin retro-styles($background, $hover-background, $shadow, $color) {
   background: $background;
-  display: inline-block;
+  // display: inline-block;
   position: relative;
-  // text-align: center;
   font-size: 1.8rem;
   padding: 2rem;
-  font-family: $font-8bit;
   text-decoration: none;
   color: $color;
-  text-transform: capitalize;
   margin: 0.8rem;
   width: 90%;
   box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $shadow;
-  cursor: url(/assets/cursor-click.png), auto;
+  cursor: url(/src/assets/retro-cursor-click.png), auto;
 
   &:hover,
   &:focus {
@@ -101,8 +97,8 @@ $fourth-button-color: #ffff;
   }
 }
 
-.eightbit-container {
-  @include eightbit-styles(
+.retro-container {
+  @include retro-styles(
     $input-container-background,
     $sec-input-container-background,
     $input-container-shadow-background,
@@ -110,22 +106,22 @@ $fourth-button-color: #ffff;
   );
 }
 
-.eightbit-btn {
-  @include eightbit-styles(
+.retro-btn {
+  @include retro-styles(
     $button-background,
     $sec-button-background,
     $button-shadow-color,
     $button-color
   );
   &--short {
-    @extend .eightbit-btn;
+    @extend .retro-btn;
     width: 35%;
     margin-left: 2rem;
   }
 }
 
-.eightbit-btn--first {
-  @include eightbit-styles(
+.retro-btn--first {
+  @include retro-styles(
     $first-button-background,
     $first-sec-button-background,
     $first-shadow-color,
@@ -133,8 +129,8 @@ $fourth-button-color: #ffff;
   );
 }
 
-.eightbit-btn--second {
-  @include eightbit-styles(
+.retro-btn--second {
+  @include retro-styles(
     $second-button-background,
     $second-sec-button-background,
     $second-shadow-color,
@@ -142,8 +138,8 @@ $fourth-button-color: #ffff;
   );
 }
 
-.eightbit-btn--third {
-  @include eightbit-styles(
+.retro-btn--third {
+  @include retro-styles(
     $third-button-background,
     $third-sec-button-background,
     $third-shadow-color,
@@ -151,8 +147,8 @@ $fourth-button-color: #ffff;
   );
 }
 
-.eightbit-btn--fourth {
-  @include eightbit-styles(
+.retro-btn--fourth {
+  @include retro-styles(
     $fourth-button-background,
     $fourth-sec-button-background,
     $fourth-shadow-color,

@@ -1,6 +1,6 @@
-@import "eightbit.scss";
+@import "retro.scss";
+@import "future.scss";
 
-$game-background: #9f0d7f;
 $modal-background: rgb(5, 79, 104);
 $backdrop-color: rgb(184, 126, 126);
 $backdrop-opacity: 0.5;
@@ -17,10 +17,9 @@ html {
 }
 
 body {
-  background-image: url(/assets/images/background.jpg);
+  background-image: url(/src/assets/images/background.jpg);
   background-size: cover;
   font-size: 1.6rem;
-  background-color: $game-background;
   margin: 0;
   padding: 0;
   display: flex;
@@ -29,12 +28,25 @@ body {
   align-items: center;
   overflow: hidden;
   height: 100vh;
-  cursor: url(/assets/cursor.png), auto;
+  cursor: url(/src/assets/retro-cursor.png), auto;
+}
+
+body,
+.btn,
+.inp {
+  font-family: "Press Start 2P", cursive;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+}
+
+.font-future {
+  font-family: "DO Futuristic", sans-serif;
+  text-transform: uppercase;
 }
 
 .game-container {
-  height: 100vh;
-  max-width: 100vw;
+  height: 95vh;
+  // max-width: 100vw;
 }
 
 .game-canvas {
@@ -43,33 +55,30 @@ body {
   justify-content: center;
 }
 
-.rest-container {
+.menu-container {
   margin: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   justify-content: space-around;
-  height: 99vh;
+  height: 95vh;
 }
 
 .shape-canvas {
   height: 60%;
 }
 
-.small-container {
+.section-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: $font-8bit;
 }
 
 .paragraph {
   font-size: 3.5vh;
   text-align: center;
   margin: 1rem;
-  font-family: $font-8bit;
-  text-transform: capitalize;
   color: #ffff;
 }
 
@@ -86,15 +95,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  &__span,
-  &__label {
+  &__span {
     margin: 1rem;
     display: flex;
     justify-content: center;
   }
   &__p {
-    font-family: $font-8bit;
     font-size: 2.2vh;
     margin: 0.5rem 0;
     display: flex;
@@ -112,12 +118,10 @@ body {
     display: flex;
     flex-direction: column;
   }
-  &__close-btn {
-    margin-top: 1rem;
-  }
   &::backdrop {
     background-color: $backdrop-color;
     opacity: $backdrop-opacity;
+    cursor: url(/src/assets/retro-cursor.png), auto;
   }
 }
 
@@ -129,7 +133,7 @@ body {
     height: 80vh;
   }
 
-  .rest-container {
+  .menu-container {
     width: 100vw;
     display: flex;
     justify-content: space-around;
@@ -141,13 +145,21 @@ body {
     height: 75%;
   }
 
-  .small-container {
+  .section-container {
     flex-direction: column;
     height: 100%;
+    &:last-child {
+      background-color: red;
+      flex-wrap: wrap;
+    }
   }
-
+  .section-container > .btn {
+    width: 40%;
+    margin: 1rem;
+  }
   .btn {
-    font-size: 3vw;
+    font-size: 1rem;
+    padding: 1.5rem;
   }
 
   .paragraph {

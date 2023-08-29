@@ -37,3 +37,4 @@ jspm_packages/
 
 # Cache folder
 .cache/
+.parcel-cache/

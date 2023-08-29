@@ -1,24 +1,26 @@
 import { shapes, shapesColors } from "./shapes.js";
 
 const nickForm = document.querySelector("#nick-form");
-// nickFieldValue = document.querySelector("#nick").value = lastNick;
-let nickField = document.querySelector("#nick");
+let nickInput = document.querySelector("#input-nick");
 
 const modal = document.querySelector("#modal");
-const openModalButton = document.querySelector(".btn-settings");
-const closeModalButton = document.querySelector(".modal__close-btn");
-const submitButton = document.querySelector(".modal__submit-btn");
+//buttons
+const openModalButton = document.querySelector("#btn-settings");
+const closeModalButton = document.querySelector("#btn-close");
+const submitButton = document.querySelector("#btn-submit");
+const startGame = document.querySelector("#btn-start");
+const pauseGame = document.querySelector("#btn-pause");
+const resetGame = document.querySelector("#btn-reset");
+const retroStyle = document.querySelector("#btn-retro");
+const futureStyle = document.querySelector("#btn-future");
+const allButtons = document.querySelectorAll("button");
 
 const score = document.querySelector(".score");
-const startGame = document.querySelector(".btn-start");
-const pauseGame = document.querySelector(".btn-pause");
-const resetGame = document.querySelector(".btn-reset");
-
+//canvas
 const gameCanvas = document.querySelector(".game-canvas");
 const shapeCanvas = document.querySelector(".shape-canvas");
 const gameCtx = gameCanvas.getContext("2d");
 const shapeCtx = shapeCanvas.getContext("2d");
-
 //20 rows and 10 cols for game, 1 row and 2 cols for edges
 const ROWS = 21;
 const COLS = 12;
@@ -133,7 +135,6 @@ function isMoveOkay(matrix, cellRow, cellCol) {
 function gameOver() {
   let [txtFirstRow, txtSecondRow] = ["GAME OVER!", ""];
   if (scoreNumber > currentHighscore) {
-    // currentHighscore = scoreNumber;
     [txtFirstRow, txtSecondRow] = ["NEW HIGHSCORE!", "CONGRATULATION!"];
     storagedHighscores[currentIndex] = scoreNumber;
     localStorage.setItem("highscores", JSON.stringify(storagedHighscores));
@@ -201,11 +202,12 @@ function placeShape() {
 }
 
 function loop() {
+  speed = speed === 5 ? 5 : 35 - scoreNumber;
   rAF = requestAnimationFrame(loop);
   gameBoard(ROWS, COLS, gameCtx, filled);
   showNextShape();
   drawShape();
-  if (loopCounter++ > 35) {
+  if (loopCounter++ > speed) {
     shape.row++;
     loopCounter = 0;
     if (!isMoveOkay(shape.matrix, shape.row, shape.col)) {
@@ -223,6 +225,7 @@ let loopCounter;
 let isGamePaused;
 let isGameOver;
 let rAF;
+let speed;
 
 function initialization() {
   shape = getShape();
@@ -232,6 +235,7 @@ function initialization() {
   isGamePaused = true;
   scoreNumber = 0;
   score.innerHTML = 0;
+  speed = 35;
   cancelAnimationFrame(rAF);
   filledBoard();
   gameBoard(ROWS, COLS, gameCtx, filled);
@@ -260,6 +264,37 @@ pauseGame.addEventListener("click", () => {
 resetGame.addEventListener("click", () => {
   initialization();
   startGame.click();
+});
+
+const buttonsClasses = [];
+
+function changeStyle() {
+  //buttons, input, font, cursor, modal background
+  allButtons.forEach((button, index) => {
+    buttonsClasses[index] = button.classList[0];
+  });
+
+  console.log(buttonsClasses);
+}
+
+changeStyle();
+
+retroStyle.addEventListener("click", () => {
+  document.body.classList.remove("font-future");
+  nickInput.classList.remove("font-future");
+  allButtons.forEach((button) => {
+    button.classList.remove("font-future");
+  });
+});
+
+futureStyle.addEventListener("click", () => {
+  document.body.classList.add("font-future");
+  nickInput.classList.remove("retro-input");
+  nickInput.classList.add("future-input");
+  allButtons.forEach((button) => {
+    button.classList = [];
+    button.classList.add("future-btn");
+  });
 });
 
 document.addEventListener("keydown", (event) => {
@@ -294,14 +329,14 @@ document.addEventListener("keydown", (event) => {
 let storagedNicks = JSON.parse(localStorage.getItem("nicks")) || [];
 let storagedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
 const lastNick = JSON.parse(localStorage.getItem("lastNick")) || null;
-nickField.value = lastNick;
+nickInput.value = lastNick;
 let currentNick = lastNick || null;
 let currentIndex = storagedNicks.indexOf(currentNick);
 let currentHighscore = 0;
 
 nickForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  currentNick = nickField.value;
+  currentNick = nickInput.value;
 
   storagedNicks = JSON.parse(localStorage.getItem("nicks")) || [];
   storagedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
@@ -329,7 +364,7 @@ openModalButton.addEventListener("click", () => {
 });
 
 closeModalButton.addEventListener("click", () => {
-  nickField.value = currentNick;
+  nickInput.value = currentNick;
   if (currentNick) {
     modal.close();
     modal.classList.toggle("modal"); // must be because of display: flex in modal
