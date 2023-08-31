@@ -32,47 +32,22 @@ $fourth-sec-button-background: #436cc5;
 $fourth-shadow-color: #1f479e;
 $fourth-button-color: #ffff;
 
-.retro-input {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  font-size: 2rem;
-  border: none;
-  &:focus {
-    outline: none;
-  }
-  &:hover {
-    cursor: inherit;
-  }
-}
-
 @mixin retro-styles($background, $hover-background, $shadow, $color) {
   background: $background;
-  // display: inline-block;
   position: relative;
-  font-size: 1.8rem;
-  padding: 2rem;
   text-decoration: none;
   color: $color;
-  margin: 0.8rem;
-  width: 90%;
   box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $shadow;
   cursor: url(/src/assets/retro-cursor-click.png), auto;
-
   &:hover,
   &:focus {
     background: $hover-background;
     box-shadow: inset (-$shadow-width * 1.5) (-$shadow-width * 1.5) 0px 0px
       $shadow;
   }
-
   &:active {
     box-shadow: inset $shadow-width $shadow-width 0px 0px $shadow;
   }
-
   &:before,
   &:after {
     content: "";
@@ -81,7 +56,6 @@ $fourth-button-color: #ffff;
     height: 100%;
     box-sizing: content-box;
   }
-
   &:before {
     top: -$outline-width;
     left: 0;
@@ -96,16 +70,15 @@ $fourth-button-color: #ffff;
     border-right: $outline-width black solid;
   }
 }
-
-.retro-container {
+.retro-inp {
   @include retro-styles(
     $input-container-background,
     $sec-input-container-background,
     $input-container-shadow-background,
     $input-container-color
   );
+  cursor: text;
 }
-
 .retro-btn {
   @include retro-styles(
     $button-background,
@@ -113,13 +86,7 @@ $fourth-button-color: #ffff;
     $button-shadow-color,
     $button-color
   );
-  &--short {
-    @extend .retro-btn;
-    width: 35%;
-    margin-left: 2rem;
-  }
 }
-
 .retro-btn--first {
   @include retro-styles(
     $first-button-background,
@@ -128,7 +95,6 @@ $fourth-button-color: #ffff;
     $first-button-color
   );
 }
-
 .retro-btn--second {
   @include retro-styles(
     $second-button-background,
@@ -137,7 +103,6 @@ $fourth-button-color: #ffff;
     $second-button-color
   );
 }
-
 .retro-btn--third {
   @include retro-styles(
     $third-button-background,
@@ -146,7 +111,6 @@ $fourth-button-color: #ffff;
     $third-button-color
   );
 }
-
 .retro-btn--fourth {
   @include retro-styles(
     $fourth-button-background,
@@ -154,4 +118,81 @@ $fourth-button-color: #ffff;
     $fourth-shadow-color,
     $fourth-button-color
   );
+}
+
+@media (max-width: 1000px) {
+  $outline-width: 3px;
+  $shadow-width: 2px;
+
+  @mixin retro-styles($background, $hover-background, $shadow, $color) {
+    box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $shadow;
+    &:hover,
+    &:focus {
+      box-shadow: inset (-$shadow-width * 1.5) (-$shadow-width * 1.5) 0px 0px
+        $shadow;
+    }
+    &:active {
+      box-shadow: inset $shadow-width $shadow-width 0px 0px $shadow;
+    }
+    &:before {
+      top: -$outline-width;
+      left: 0;
+      border-top: $outline-width black solid;
+      border-bottom: $outline-width black solid;
+    }
+    &:after {
+      left: -$outline-width;
+      top: 0;
+      border-left: $outline-width black solid;
+      border-right: $outline-width black solid;
+    }
+  }
+  .retro-inp {
+    @include retro-styles(
+      $input-container-background,
+      $sec-input-container-background,
+      $input-container-shadow-background,
+      $input-container-color
+    );
+  }
+  .retro-btn {
+    @include retro-styles(
+      $button-background,
+      $sec-button-background,
+      $button-shadow-color,
+      $button-color
+    );
+  }
+  .retro-btn--first {
+    @include retro-styles(
+      $first-button-background,
+      $first-sec-button-background,
+      $first-shadow-color,
+      $first-button-color
+    );
+  }
+  .retro-btn--second {
+    @include retro-styles(
+      $second-button-background,
+      $second-sec-button-background,
+      $second-shadow-color,
+      $second-button-color
+    );
+  }
+  .retro-btn--third {
+    @include retro-styles(
+      $third-button-background,
+      $third-sec-button-background,
+      $third-shadow-color,
+      $third-button-color
+    );
+  }
+  .retro-btn--fourth {
+    @include retro-styles(
+      $fourth-button-background,
+      $fourth-sec-button-background,
+      $fourth-shadow-color,
+      $fourth-button-color
+    );
+  }
 }

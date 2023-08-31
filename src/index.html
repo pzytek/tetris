@@ -25,24 +25,30 @@
       <dialog id="modal">
         <div class="modal__nick-content">
           <span class="modal__span paragraph">nick</span>
-          <form id="nick-form" class="modal__form">
-            <div class="retro-container">
-              <input
-                type="text"
-                id="input-nick"
-                name="nick"
-                class="inp retro-input"
-                type="text"
-                placeholder="Enter nick "
-                pattern="[^ ]{1,10}"
-                title="Username must consist of 1 to 10 characters, no spaces."
-                autocomplete="off"
-                required
-              />
+          <form id="nick-form">
+            <div class="space-around">
+              <div class="inp retro-inp">
+                <input
+                  type="text"
+                  id="input-nick"
+                  name="nick"
+                  class="inp--child"
+                  type="text"
+                  placeholder="Enter nick "
+                  pattern="[^ ]{1,10}"
+                  title="Username must consist of 1 to 10 characters, no spaces."
+                  autocomplete="off"
+                  required
+                />
+              </div>
+              <button
+                id="btn-submit"
+                type="submit"
+                class="btn--short retro-btn"
+              >
+                submit
+              </button>
             </div>
-            <button id="btn-submit" type="submit" class="btn retro-btn--short">
-              submit
-            </button>
           </form>
         </div>
         <div class="modal__controls-content">
@@ -56,8 +62,8 @@
         <div class="modal__style-content">
           <span class="modal__span paragraph">style</span>
           <div class="space-around">
-            <button id="btn-retro" class="btn retro-btn--short">retro</button>
-            <button id="btn-future" class="btn retro-btn--short">future</button>
+            <button id="btn-retro" class="btn--short retro-btn">retro</button>
+            <button id="btn-future" class="btn--short retro-btn">future</button>
           </div>
         </div>
         <button id="btn-close" class="btn retro-btn">close</button>

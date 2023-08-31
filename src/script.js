@@ -150,7 +150,7 @@ function gameOver() {
 
   gameCtx.globalAlpha = 1;
   gameCtx.fillStyle = "white";
-  gameCtx.font = "bold 16px 'Press Start 2P'";
+  gameCtx.font = "bold 15px 'Press Start 2P'";
   gameCtx.textAlign = "center";
   gameCtx.textBaseline = "middle";
   gameCtx.fillText(
