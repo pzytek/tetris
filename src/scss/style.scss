@@ -1,6 +1,7 @@
 @import "retro.scss";
 @import "future.scss";
 
+$game-background: #ffff;
 $modal-background: rgb(5, 79, 104);
 $backdrop-color: rgb(184, 126, 126);
 $backdrop-opacity: 0.5;
@@ -29,9 +30,15 @@ body {
   overflow: hidden;
   height: 100vh;
   cursor: url(/src/assets/retro-cursor.png), auto;
+  // cursor: text;
   font-family: "Press Start 2P", cursive;
   text-transform: lowercase;
   letter-spacing: 0.1rem;
+}
+
+.future-settings {
+  font-family: $font-future;
+  cursor: url(/src/assets/futuristic-cursor.png), auto;
 }
 
 .game-container {
@@ -49,6 +56,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   height: 95vh;
+  min-width: 10vw;
   margin-left: 1rem;
 }
 
@@ -64,15 +72,15 @@ body {
 }
 
 .paragraph {
-  font-size: 2.4rem;
+  font-size: 2.5rem;
+  margin: 1rem;
   text-align: center;
-  margin: 0rem 0;
   color: #ffff;
   text-transform: capitalize;
 }
 
 @mixin btn-inp-styles {
-  font-family: "Press Start 2P", cursive;
+  // font-family: "Press Start 2P", cursive;
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
   padding: 2.5vh;
@@ -95,11 +103,17 @@ body {
 .inp {
   @include btn-inp-styles;
   width: 60%;
+  cursor: text;
   &--child {
     @extend .inp;
+    background-color: inherit;
+    font-family: inherit;
+    color: inherit;
     padding: 0;
     margin: 0;
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     z-index: 1;
     font-size: inherit;
@@ -125,7 +139,7 @@ body {
   align-items: center;
   justify-content: space-between;
   &__span {
-    margin: 0.5rem;
+    margin: 0.7rem;
     display: flex;
     justify-content: center;
   }
@@ -148,7 +162,6 @@ body {
   &::backdrop {
     background-color: $backdrop-color;
     opacity: $backdrop-opacity;
-    cursor: url(/src/assets/retro-cursor.png), auto;
   }
 }
 
@@ -193,17 +206,8 @@ body {
     padding: 1.5vh;
   }
 
-  .paragraph {
-    font-size: 2.5rem;
-  }
-
-  .modal {
-    &__span {
-      margin: 1.2rem 0 0.6rem 0;
-    }
-    &__p {
-      font-size: 1.8rem;
-    }
+  .modal__span {
+    margin: 1.2rem 0 0.6rem 0;
   }
 }
 
@@ -218,7 +222,7 @@ body {
   }
   .btn,
   .inp {
-    font-size: 1.1rem;
+    font-size: 1rem;
     padding: 1.1vh;
   }
 

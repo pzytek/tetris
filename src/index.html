@@ -27,7 +27,7 @@
           <span class="modal__span paragraph">nick</span>
           <form id="nick-form">
             <div class="space-around">
-              <div class="inp retro-inp">
+              <div id="inp-container" class="inp retro-style">
                 <input
                   type="text"
                   id="input-nick"
@@ -44,7 +44,7 @@
               <button
                 id="btn-submit"
                 type="submit"
-                class="btn--short retro-btn"
+                class="btn--short retro-style"
               >
                 submit
               </button>
@@ -62,11 +62,13 @@
         <div class="modal__style-content">
           <span class="modal__span paragraph">style</span>
           <div class="space-around">
-            <button id="btn-retro" class="btn--short retro-btn">retro</button>
-            <button id="btn-future" class="btn--short retro-btn">future</button>
+            <button id="btn-retro" class="btn--short retro-style">retro</button>
+            <button id="btn-future" class="btn--short retro-style">
+              future
+            </button>
           </div>
         </div>
-        <button id="btn-close" class="btn retro-btn">close</button>
+        <button id="btn-close" class="btn retro-style">close</button>
       </dialog>
       <canvas class="game-canvas"></canvas>
     </div>
@@ -80,10 +82,10 @@
         <canvas class="shape-canvas"></canvas>
       </div>
       <div class="section-container">
-        <button id="btn-start" class="btn retro-btn--first">start</button>
-        <button id="btn-pause" class="btn retro-btn--second">pause</button>
-        <button id="btn-reset" class="btn retro-btn--third">reset</button>
-        <button id="btn-settings" class="btn retro-btn--fourth">set</button>
+        <button id="btn-start" class="btn retro-style">start</button>
+        <button id="btn-pause" class="btn retro-style">pause</button>
+        <button id="btn-reset" class="btn retro-style">reset</button>
+        <button id="btn-settings" class="btn retro-style">settings</button>
       </div>
     </div>
   </body>

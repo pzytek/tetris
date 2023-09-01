@@ -2,51 +2,24 @@ $outline-width: 6px;
 $shadow-width: 4px;
 $font-retro: "Press Start 2P", cursive;
 
-$input-container-background: #ffff;
-$sec-input-container-background: #ffff;
-$input-container-shadow-background: #ffff;
-$input-container-color: #ffff;
-
-$button-background: #ffff;
-$sec-button-background: #ece5e5;
-$button-shadow-color: #c9b9b9;
-$button-color: #000000;
-
-$first-button-background: #92cd41;
-$first-sec-button-background: #76c442;
-$first-shadow-color: #4aa52e;
-$first-button-color: #ffff;
-
-$second-button-background: #e76e55;
-$second-sec-button-background: #ce372b;
-$second-shadow-color: #8c2022;
-$second-button-color: #ffff;
-
-$third-button-background: #f7d51d;
-$third-sec-button-background: #d1aa0f;
-$third-shadow-color: #e59400;
-$third-button-color: #ffff;
-
-$fourth-button-background: #5d84d8;
-$fourth-sec-button-background: #436cc5;
-$fourth-shadow-color: #1f479e;
-$fourth-button-color: #ffff;
-
-@mixin retro-styles($background, $hover-background, $shadow, $color) {
-  background: $background;
+@mixin retro-style-mixin($outline-width-mixin, $shadow-width-mixin) {
+  z-index: 1;
+  font-family: $font-retro;
+  background: #ffff;
   position: relative;
   text-decoration: none;
-  color: $color;
-  box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $shadow;
+  color: #000000;
+  box-shadow: inset (-$shadow-width-mixin) (-$shadow-width-mixin) 0px 0px
+    #c9b9b9;
   cursor: url(/src/assets/retro-cursor-click.png), auto;
   &:hover,
   &:focus {
-    background: $hover-background;
-    box-shadow: inset (-$shadow-width * 1.5) (-$shadow-width * 1.5) 0px 0px
-      $shadow;
+    background: #ece5e5;
+    box-shadow: inset (-$shadow-width-mixin * 1.5) (-$shadow-width-mixin * 1.5)
+      0px 0px #c9b9b9;
   }
   &:active {
-    box-shadow: inset $shadow-width $shadow-width 0px 0px $shadow;
+    box-shadow: inset $shadow-width-mixin $shadow-width-mixin 0px 0px #c9b9b9;
   }
   &:before,
   &:after {
@@ -57,142 +30,39 @@ $fourth-button-color: #ffff;
     box-sizing: content-box;
   }
   &:before {
-    top: -$outline-width;
+    top: -$outline-width-mixin;
     left: 0;
-    border-top: $outline-width black solid;
-    border-bottom: $outline-width black solid;
+    border-top: $outline-width-mixin black solid;
+    border-bottom: $outline-width-mixin black solid;
   }
-
   &:after {
-    left: -$outline-width;
+    left: -$outline-width-mixin;
     top: 0;
-    border-left: $outline-width black solid;
-    border-right: $outline-width black solid;
+    border-left: $outline-width-mixin black solid;
+    border-right: $outline-width-mixin black solid;
   }
 }
-.retro-inp {
-  @include retro-styles(
-    $input-container-background,
-    $sec-input-container-background,
-    $input-container-shadow-background,
-    $input-container-color
-  );
-  cursor: text;
+
+.retro-style {
+  @include retro-style-mixin($outline-width, $shadow-width);
 }
-.retro-btn {
-  @include retro-styles(
-    $button-background,
-    $sec-button-background,
-    $button-shadow-color,
-    $button-color
-  );
-}
-.retro-btn--first {
-  @include retro-styles(
-    $first-button-background,
-    $first-sec-button-background,
-    $first-shadow-color,
-    $first-button-color
-  );
-}
-.retro-btn--second {
-  @include retro-styles(
-    $second-button-background,
-    $second-sec-button-background,
-    $second-shadow-color,
-    $second-button-color
-  );
-}
-.retro-btn--third {
-  @include retro-styles(
-    $third-button-background,
-    $third-sec-button-background,
-    $third-shadow-color,
-    $third-button-color
-  );
-}
-.retro-btn--fourth {
-  @include retro-styles(
-    $fourth-button-background,
-    $fourth-sec-button-background,
-    $fourth-shadow-color,
-    $fourth-button-color
-  );
+
+div.retro-style {
+  &:hover,
+  &:focus {
+    background: #ffff;
+    box-shadow: 0px 0px 0px 0px #c9b9b9;
+  }
+  &:active {
+    box-shadow: 0px 0px 0px 0px #c9b9b9;
+  }
 }
 
 @media (max-width: 1000px) {
-  $outline-width: 3px;
-  $shadow-width: 2px;
-
-  @mixin retro-styles($background, $hover-background, $shadow, $color) {
-    box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $shadow;
-    &:hover,
-    &:focus {
-      box-shadow: inset (-$shadow-width * 1.5) (-$shadow-width * 1.5) 0px 0px
-        $shadow;
-    }
-    &:active {
-      box-shadow: inset $shadow-width $shadow-width 0px 0px $shadow;
-    }
-    &:before {
-      top: -$outline-width;
-      left: 0;
-      border-top: $outline-width black solid;
-      border-bottom: $outline-width black solid;
-    }
-    &:after {
-      left: -$outline-width;
-      top: 0;
-      border-left: $outline-width black solid;
-      border-right: $outline-width black solid;
-    }
-  }
-  .retro-inp {
-    @include retro-styles(
-      $input-container-background,
-      $sec-input-container-background,
-      $input-container-shadow-background,
-      $input-container-color
-    );
-  }
-  .retro-btn {
-    @include retro-styles(
-      $button-background,
-      $sec-button-background,
-      $button-shadow-color,
-      $button-color
-    );
-  }
-  .retro-btn--first {
-    @include retro-styles(
-      $first-button-background,
-      $first-sec-button-background,
-      $first-shadow-color,
-      $first-button-color
-    );
-  }
-  .retro-btn--second {
-    @include retro-styles(
-      $second-button-background,
-      $second-sec-button-background,
-      $second-shadow-color,
-      $second-button-color
-    );
-  }
-  .retro-btn--third {
-    @include retro-styles(
-      $third-button-background,
-      $third-sec-button-background,
-      $third-shadow-color,
-      $third-button-color
-    );
-  }
-  .retro-btn--fourth {
-    @include retro-styles(
-      $fourth-button-background,
-      $fourth-sec-button-background,
-      $fourth-shadow-color,
-      $fourth-button-color
+  .retro-style {
+    @include retro-style-mixin(
+      calc($outline-width / 2),
+      calc($shadow-width / 2)
     );
   }
 }

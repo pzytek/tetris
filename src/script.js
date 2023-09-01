@@ -2,20 +2,22 @@ import { shapes, shapesColors } from "./shapes.js";
 
 const nickForm = document.querySelector("#nick-form");
 let nickInput = document.querySelector("#input-nick");
+const inputContainer = document.querySelector("#inp-container");
 
 const modal = document.querySelector("#modal");
 //buttons
 const openModalButton = document.querySelector("#btn-settings");
 const closeModalButton = document.querySelector("#btn-close");
 const submitButton = document.querySelector("#btn-submit");
-const startGame = document.querySelector("#btn-start");
-const pauseGame = document.querySelector("#btn-pause");
-const resetGame = document.querySelector("#btn-reset");
-const retroStyle = document.querySelector("#btn-retro");
-const futureStyle = document.querySelector("#btn-future");
+const startButton = document.querySelector("#btn-start");
+const pauseButton = document.querySelector("#btn-pause");
+const resetButton = document.querySelector("#btn-reset");
+const retroButton = document.querySelector("#btn-retro");
+const futureButton = document.querySelector("#btn-future");
 const allButtons = document.querySelectorAll("button");
 
 const score = document.querySelector(".score");
+let retroStyle = true;
 //canvas
 const gameCanvas = document.querySelector(".game-canvas");
 const shapeCanvas = document.querySelector(".shape-canvas");
@@ -133,9 +135,9 @@ function isMoveOkay(matrix, cellRow, cellCol) {
 }
 
 function gameOver() {
-  let [txtFirstRow, txtSecondRow] = ["GAME OVER!", ""];
+  let [txtFirstRow, txtSecondRow] = ["GAME OVER", ""];
   if (scoreNumber > currentHighscore) {
-    [txtFirstRow, txtSecondRow] = ["NEW HIGHSCORE!", "CONGRATULATION!"];
+    [txtFirstRow, txtSecondRow] = ["NEW HIGHSCORE", "CONGRATULATION"];
     storagedHighscores[currentIndex] = scoreNumber;
     localStorage.setItem("highscores", JSON.stringify(storagedHighscores));
   }
@@ -150,7 +152,9 @@ function gameOver() {
 
   gameCtx.globalAlpha = 1;
   gameCtx.fillStyle = "white";
-  gameCtx.font = "bold 15px 'Press Start 2P'";
+  gameCtx.font = retroStyle
+    ? "bold 15px 'Press Start 2P'"
+    : "bold 15px 'DO Futuristic'";
   gameCtx.textAlign = "center";
   gameCtx.textBaseline = "middle";
   gameCtx.fillText(
@@ -217,6 +221,16 @@ function loop() {
   }
 }
 
+function changeStyle() {
+  document.body.classList.toggle("future-settings");
+  inputContainer.classList.toggle("retro-style");
+  inputContainer.classList.toggle("future-style");
+  allButtons.forEach((button) => {
+    button.classList.toggle("retro-style");
+    button.classList.toggle("future-style");
+  });
+}
+
 //initialization variables
 let scoreNumber;
 let shape;
@@ -244,7 +258,7 @@ function initialization() {
 
 initialization();
 
-startGame.addEventListener("click", () => {
+startButton.addEventListener("click", () => {
   if (isGameOver) {
     initialization();
   }
@@ -254,47 +268,16 @@ startGame.addEventListener("click", () => {
   }
 });
 
-pauseGame.addEventListener("click", () => {
+pauseButton.addEventListener("click", () => {
   if (!isGamePaused) {
     cancelAnimationFrame(rAF);
     isGamePaused = true;
   }
 });
 
-resetGame.addEventListener("click", () => {
+resetButton.addEventListener("click", () => {
   initialization();
-  startGame.click();
-});
-
-const buttonsClasses = [];
-
-function changeStyle() {
-  //buttons, input, font, cursor, modal background
-  allButtons.forEach((button, index) => {
-    buttonsClasses[index] = button.classList[0];
-  });
-
-  console.log(buttonsClasses);
-}
-
-changeStyle();
-
-retroStyle.addEventListener("click", () => {
-  document.body.classList.remove("font-future");
-  nickInput.classList.remove("font-future");
-  allButtons.forEach((button) => {
-    button.classList.remove("font-future");
-  });
-});
-
-futureStyle.addEventListener("click", () => {
-  document.body.classList.add("font-future");
-  nickInput.classList.remove("retro-input");
-  nickInput.classList.add("future-input");
-  allButtons.forEach((button) => {
-    button.classList = [];
-    button.classList.add("future-btn");
-  });
+  startButton.click();
 });
 
 document.addEventListener("keydown", (event) => {
@@ -325,12 +308,48 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+openModalButton.addEventListener("click", () => {
+  modal.showModal();
+  modal.classList.toggle("modal"); // must be because of display: flex in modal
+  pauseButton.click();
+});
+
+closeModalButton.addEventListener("click", () => {
+  nickInput.value = currentNick;
+  if (currentNick) {
+    modal.close();
+    modal.classList.toggle("modal"); // must be because of display: flex in modal
+  } else {
+    alert("Nick field can not be empty!");
+  }
+});
+
+modal.addEventListener("cancel", (event) => {
+  event.preventDefault();
+});
+
+retroButton.addEventListener("click", () => {
+  if (!retroStyle) changeStyle();
+  retroStyle = true;
+});
+futureButton.addEventListener("click", () => {
+  if (retroStyle) changeStyle();
+  retroStyle = false;
+});
+
 //load data from local storage
+// let storagedNicks = JSON.parse(localStorage.getItem("nicks")) || [];
+// let storagedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
+// const lastNick = JSON.parse(localStorage.getItem("lastNick")) || null;
+// nickInput.value = lastNick;
+// let currentNick = lastNick || null;
+// let currentIndex = storagedNicks.indexOf(currentNick);
+// let currentHighscore = 0;
+
 let storagedNicks = JSON.parse(localStorage.getItem("nicks")) || [];
 let storagedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
-const lastNick = JSON.parse(localStorage.getItem("lastNick")) || null;
-nickInput.value = lastNick;
-let currentNick = lastNick || null;
+nickInput.value = JSON.parse(localStorage.getItem("lastNick")) || null;
+let currentNick = nickInput.value || null;
 let currentIndex = storagedNicks.indexOf(currentNick);
 let currentHighscore = 0;
 
@@ -355,24 +374,4 @@ nickForm.addEventListener("submit", (event) => {
   } else {
     currentHighscore = storagedHighscores[currentIndex];
   }
-});
-
-openModalButton.addEventListener("click", () => {
-  modal.showModal();
-  modal.classList.toggle("modal"); // must be because of display: flex in modal
-  pauseGame.click();
-});
-
-closeModalButton.addEventListener("click", () => {
-  nickInput.value = currentNick;
-  if (currentNick) {
-    modal.close();
-    modal.classList.toggle("modal"); // must be because of display: flex in modal
-  } else {
-    alert("Nick field can not be empty!");
-  }
-});
-
-modal.addEventListener("cancel", (event) => {
-  event.preventDefault();
 });
