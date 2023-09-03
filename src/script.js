@@ -18,6 +18,15 @@ const allButtons = document.querySelectorAll("button");
 
 const score = document.querySelector(".score");
 let retroStyle = true;
+
+//load from local storage
+let storagedNicks = JSON.parse(localStorage.getItem("nicks")) || [];
+let storagedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
+let currentNick = JSON.parse(localStorage.getItem("lastNick")) || null;
+let currentIndex = storagedNicks.indexOf(currentNick);
+let currentHighscore = 0;
+if (!currentNick) openModalButton.click(); //show modal with first open
+
 //canvas
 const gameCanvas = document.querySelector(".game-canvas");
 const shapeCanvas = document.querySelector(".shape-canvas");
@@ -139,6 +148,7 @@ function gameOver() {
   if (scoreNumber > currentHighscore) {
     [txtFirstRow, txtSecondRow] = ["NEW HIGHSCORE", "CONGRATULATION"];
     storagedHighscores[currentIndex] = scoreNumber;
+    console.log(storagedHighscores);
     localStorage.setItem("highscores", JSON.stringify(storagedHighscores));
   }
   gameCtx.globalAlpha = 0.75;
@@ -281,7 +291,8 @@ resetButton.addEventListener("click", () => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (rAF) {
+  if (rAF && !isGamePaused) {
+    //prevent from f.e. space when game is paused
     if (event.key === "ArrowUp") {
       const matrix = rotateShape(shape.matrix);
       if (isMoveOkay(matrix, shape.row, shape.col)) shape.matrix = matrix;
@@ -309,6 +320,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 openModalButton.addEventListener("click", () => {
+  nickInput.value = currentNick;
   modal.showModal();
   modal.classList.toggle("modal"); // must be because of display: flex in modal
   pauseButton.click();
@@ -337,22 +349,6 @@ futureButton.addEventListener("click", () => {
   retroStyle = false;
 });
 
-//load data from local storage
-// let storagedNicks = JSON.parse(localStorage.getItem("nicks")) || [];
-// let storagedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
-// const lastNick = JSON.parse(localStorage.getItem("lastNick")) || null;
-// nickInput.value = lastNick;
-// let currentNick = lastNick || null;
-// let currentIndex = storagedNicks.indexOf(currentNick);
-// let currentHighscore = 0;
-
-let storagedNicks = JSON.parse(localStorage.getItem("nicks")) || [];
-let storagedHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
-nickInput.value = JSON.parse(localStorage.getItem("lastNick")) || null;
-let currentNick = nickInput.value || null;
-let currentIndex = storagedNicks.indexOf(currentNick);
-let currentHighscore = 0;
-
 nickForm.addEventListener("submit", (event) => {
   event.preventDefault();
   currentNick = nickInput.value;
@@ -371,6 +367,7 @@ nickForm.addEventListener("submit", (event) => {
       "highscores",
       JSON.stringify([...storagedHighscores, 0])
     );
+    currentIndex = storagedNicks.length;
   } else {
     currentHighscore = storagedHighscores[currentIndex];
   }

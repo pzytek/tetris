@@ -1,8 +1,8 @@
 @import "retro.scss";
 @import "future.scss";
 
-$game-background: #ffff;
-$modal-background: rgb(5, 79, 104);
+$game-background: rgb(5, 22, 68);
+$modal-background: rgb(5, 22, 68);
 $backdrop-color: rgb(184, 126, 126);
 $backdrop-opacity: 0.5;
 
@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  background-image: url(/src/assets/images/background.jpg);
+  background-color: $game-background;
   background-size: cover;
   font-size: 1.6rem;
   margin: 0;
@@ -30,7 +30,6 @@ body {
   overflow: hidden;
   height: 100vh;
   cursor: url(/src/assets/retro-cursor.png), auto;
-  // cursor: text;
   font-family: "Press Start 2P", cursive;
   text-transform: lowercase;
   letter-spacing: 0.1rem;
@@ -47,8 +46,6 @@ body {
 
 .game-canvas {
   height: inherit;
-  align-items: center;
-  justify-content: center;
 }
 
 .menu-container {
@@ -80,7 +77,6 @@ body {
 }
 
 @mixin btn-inp-styles {
-  // font-family: "Press Start 2P", cursive;
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
   padding: 2.5vh;
@@ -103,6 +99,8 @@ body {
 .inp {
   @include btn-inp-styles;
   width: 60%;
+  padding: 0;
+  text-align: center;
   cursor: text;
   &--child {
     @extend .inp;
@@ -114,7 +112,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
     width: 100%;
+    position: relative;
     z-index: 1;
     font-size: inherit;
     border: none;
@@ -194,6 +194,7 @@ body {
     }
   }
   .section-container > .btn {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -203,7 +204,7 @@ body {
   .btn,
   .inp {
     font-size: 1.7rem;
-    padding: 1.5vh;
+    padding: 1.3vh;
   }
 
   .modal__span {
@@ -223,7 +224,7 @@ body {
   .btn,
   .inp {
     font-size: 1rem;
-    padding: 1.1vh;
+    padding: 1.3vh;
   }
 
   .paragraph {
@@ -238,5 +239,21 @@ body {
     &__p {
       font-size: 1rem;
     }
+  }
+}
+
+//fold
+@media (max-width: 300px) {
+  .game-container {
+    width: 100vw;
+  }
+  .inp,
+  .btn {
+    text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    padding: 1vh;
   }
 }

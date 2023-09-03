@@ -3,7 +3,6 @@ $shadow-width: 4px;
 $font-retro: "Press Start 2P", cursive;
 
 @mixin retro-style-mixin($outline-width-mixin, $shadow-width-mixin) {
-  z-index: 1;
   font-family: $font-retro;
   background: #ffff;
   position: relative;
