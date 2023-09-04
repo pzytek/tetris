@@ -2,14 +2,9 @@
 
 Experience the nostalgia and challenge of the classic Tetris game brought to life in JavaScript.
 
-### How to run
+### App
 
-To run the application locally, follow these steps:
-
-1. Clone the repository: git clone https://github.com/pzytek/tetris.git
-2. Navigate to the project directory: cd tetris
-3. Install dependencies: npm install
-4. Open project with command in terminal: npm run build
+https://pzytek.github.io/tetris/src/index.html
 
 ### Features
 
@@ -24,6 +19,11 @@ To run the application locally, follow these steps:
 - CSS (SASS)
 - JavaScript
 
-### App
+### How to run
 
-https://github.com/pzytek/tetris
+To run the application locally, follow these steps:
+
+1. Clone the repository: git clone https://github.com/pzytek/tetris.git
+2. Navigate to the project directory: cd tetris
+3. Install dependencies: npm install
+4. Open project with command in terminal: npm run build
