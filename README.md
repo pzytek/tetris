@@ -6,6 +6,15 @@ Experience the nostalgia and challenge of the classic Tetris game brought to lif
 
 https://pzytek.github.io/tetris/src/index.html
 
+### How to run
+
+To run the application locally, follow these steps:
+
+1. Clone the repository: git clone https://github.com/pzytek/tetris.git
+2. Navigate to the project directory: cd tetris
+3. Install dependencies: npm install
+4. Open project with command in terminal: npm run build
+
 ### Features
 
 - Simple controls for easy and intuitive gameplay.
@@ -18,12 +27,3 @@ https://pzytek.github.io/tetris/src/index.html
 - HTML
 - CSS (SASS)
 - JavaScript
-
-### How to run
-
-To run the application locally, follow these steps:
-
-1. Clone the repository: git clone https://github.com/pzytek/tetris.git
-2. Navigate to the project directory: cd tetris
-3. Install dependencies: npm install
-4. Open project with command in terminal: npm run build
