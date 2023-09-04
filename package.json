@@ -1,6 +1,9 @@
 {
   "name": "tetris",
   "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
   "description": "A classic Tetris game implemented in JavaScript",
   "repository": {
     "type": "git",
@@ -14,7 +17,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@parcel/transformer-sass": "^2.9.3",
     "parcel": "^2.9.3",
     "sass": "^1.66.1",
