@@ -1,4 +1,4 @@
-# ToDo-List
+# Tetris
 
 Experience the nostalgia and challenge of the classic Tetris game brought to life in JavaScript.
 
